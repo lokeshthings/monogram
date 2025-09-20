@@ -9,7 +9,37 @@ import SwiftUI
 
 struct SearchAndFilterView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(spacing: 12){
+            Image(systemName: "magnifyingglass")
+                
+            
+            VStack(alignment: .leading ,spacing: 3){
+                Text("Where to?")
+                    .fontWeight(.semibold)
+                    .font(.footnote)
+                
+                
+                Text("Any week- Anywhere - Anytime ")
+                    .font(.footnote)
+
+            }
+            Spacer()
+            Button{
+                //act
+            }label: {
+                Image(systemName: "line.3.horizontal.decrease.circle")
+                    .foregroundStyle(.black)
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical,10)
+        .overlay{
+            Capsule()
+                .stroke(lineWidth: 0.5)
+                .foregroundColor(Color(.systemGray4))
+                .shadow(color: .black.opacity(0.5),
+                        radius: 2)
+        }
     }
 }
 

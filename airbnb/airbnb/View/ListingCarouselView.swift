@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct ListingCarouselView: View {
+    let listing: Listing
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        TabView{
+            ForEach(listing.imageURLs, id: \.self) { image in Image(image)
+                    .resizable()
+                    .scaledToFill()
+            }
+        }
+            
+            .tabViewStyle(.page)
+        
     }
 }
 
 #Preview {
-    ListingCarouselView()
+    ListingCarouselView(listing: MockData.shared.listing[0])
 }

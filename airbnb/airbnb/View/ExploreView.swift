@@ -8,8 +8,46 @@
 import SwiftUI
 
 struct ExploreView: View {
+    @State private var showdestinationSearchView = false
+    @StateObject var viewModel = ExploreViewViewModel(service: ExploreService())
+    let columns = [
+        GridItem(.flexible())
+    ]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationStack{
+            if showdestinationSearchView {
+                DestinationSearchView(show: $showdestinationSearchView)
+            }
+            else{
+                ScrollView{
+                    SearchAndFilterView()
+                        .padding()
+                        .onTapGesture {
+                            withAnimation(.snappy){
+                                showdestinationSearchView.toggle()
+                            }
+                        }
+                    
+                    LazyVStack(spacing: 32){
+                        ForEach(viewModel.listing) { listing in
+                            NavigationLink(value: listing){
+                                ListingItemView(listing: listing)
+                                    .frame(height: 400)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                            }
+                        }
+                        
+                    }
+                   
+                }
+                .navigationDestination(for: Listing.self){ listing in
+                    ListingDetailView(listing: listing)
+                        .toolbar(.hidden, for: .navigationBar)
+                }
+            }
+        
+        }
     }
 }
 

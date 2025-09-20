@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class ExploreService {
+    func fetchListing()async throws -> [Listing]{
+        return MockData.shared.listing
+    }
+}
